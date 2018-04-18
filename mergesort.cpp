@@ -80,7 +80,7 @@ void mergesort(int *I, int p, int r)
 	if(p<r){
 		q = ceil((p+r)/2);
 		mergesort(I,p,q-1);
-		mergesort(I,p+1,r);
+		mergesort(I,q+1,r);
 		intercala(I,p,q,r);
 	}
 }
@@ -96,7 +96,7 @@ int *gen(int n)
 
 int main()
 {
-	int n = 5;
+	int n = 100;
 	int *I;
 	I = gen(n);	
 	int O[n];	
@@ -114,7 +114,7 @@ int main()
 	int *I2;
 	I2 = gen(n);
    	t_ini = clock();
-	mergesort(I2,0,n);
+	mergesort(I2,0,n-1);
 	t_fin = clock();
    	cout <<"clase: "<< static_cast<double>(t_fin - t_ini)<< '|';
 	
@@ -127,7 +127,6 @@ int main()
 	
 	return 0;//tiempo y n----299, train swapping. 10327 flip sort.
 }
-
 
 
 
