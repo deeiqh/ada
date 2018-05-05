@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -55,15 +56,18 @@ double *gen(int n)
 }
 
 void insertion_sort(double I[],double O[], int n){
-        for(int i = 1; i < n; ++i){
-                for(int j = i; j > 0; --j)
-                        if(I[j-1] > I[j])
-                                swap(I[j-1], I[j]);                                
-        }
         for(int i = 0; i < n; ++i){
+                for(int j = i; j > 0; --j)
+                        if(I[j-1] > I[j]){
+                                double aux = I[j];
+                                I[j] = I[j-1];
+                                I[j-1]=aux;
+                        }                             
+        }
+        for(int i = 0; i != n; i++){
                 O[i]=I[i];
         }
-  
+ 
 }
 
 void Merge_insert(double A[], double B[], int n)
@@ -80,8 +84,11 @@ void Merge_insert(double A[], double B[], int n)
 void Merge_quick(double A[], double B[], int n)
 {
         if(n<= 64){
-                vector<double>
-                insertion_sort(A,B,n);
+                vector<double> v(A,A+n);
+                sort (v.begin(), v.end()); 
+                for(int i = 0; i < n; ++i){
+                        B[i]=v[i];
+                }
         }
         else{
                 CopyArray(A, 0, n, B);           
@@ -97,7 +104,7 @@ int main()
 	double O[n];		
 	time_t t_ini, t_fin;
    	t_ini = clock();
-	insertion_sort(I,O,n);
+	Merge_quick(I,O,n);
 	t_fin = clock();
    	cout <<"wiki: "<< static_cast<double>(t_fin - t_ini)/CLOCKS_PER_SEC<< "s\n";
    	
