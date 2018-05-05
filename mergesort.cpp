@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -98,19 +99,19 @@ void Merge_quick(double A[], double B[], int n)
 
 int main()
 {
-        int n = 124;
+        int n = 1024;
 	double *I;
 	I = gen(n);	
-	double O[n];		
+	double O[n];
 	time_t t_ini, t_fin;
    	t_ini = clock();
-	Merge_quick(I,O,n);
+	Merge_insert(I,O,n);
 	t_fin = clock();
    	cout <<"wiki: "<< static_cast<double>(t_fin - t_ini)/CLOCKS_PER_SEC<< "s\n";
    	
-   	for(int j = 0; j < n; j++){
-   	        cout << O[j] << ' ';
-   	}
+   	
+   	
+
    	cout << '\n';   	
    	
    	
