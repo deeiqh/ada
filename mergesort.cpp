@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <algorithm>
 
 using namespace std;
 
@@ -38,7 +39,7 @@ void TopDownSplitMerge(double B[], int iBegin, int iEnd,double  A[])
 
 
 
-void TopDownMergeSort(double A[], double B[], int n)
+void Merge_normal(double A[], double B[], int n)
 {
     CopyArray(A, 0, n, B);           
     TopDownSplitMerge(B, 0, n, A);   
@@ -53,20 +54,62 @@ double *gen(int n)
 	return arr;
 }
 
+void insertion_sort(double I[],double O[], int n){
+        for(int i = 1; i < n; ++i){
+                for(int j = i; j > 0; --j)
+                        if(I[j-1] > I[j])
+                                swap(I[j-1], I[j]);                                
+        }
+        for(int i = 0; i < n; ++i){
+                O[i]=I[i];
+        }
+  
+}
+
+void Merge_insert(double A[], double B[], int n)
+{
+        if(n<= 64){
+                insertion_sort(A,B,n);
+        }
+        else{
+                CopyArray(A, 0, n, B);           
+                TopDownSplitMerge(B, 0, n, A);   
+        }
+}
+
+void Merge_quick(double A[], double B[], int n)
+{
+        if(n<= 64){
+                vector<double>
+                insertion_sort(A,B,n);
+        }
+        else{
+                CopyArray(A, 0, n, B);           
+                TopDownSplitMerge(B, 0, n, A);   
+        }
+}
+
 int main()
 {
-        int n = 100;
+        int n = 124;
 	double *I;
 	I = gen(n);	
 	double O[n];		
 	time_t t_ini, t_fin;
    	t_ini = clock();
-	TopDownMergeSort(I,O,n);
+	insertion_sort(I,O,n);
 	t_fin = clock();
-   	cout <<"wiki: "<< static_cast<double>(t_fin - t_ini)<< '|';
+   	cout <<"wiki: "<< static_cast<double>(t_fin - t_ini)/CLOCKS_PER_SEC<< "s\n";
+   	
+   	for(int j = 0; j < n; j++){
+   	        cout << O[j] << ' ';
+   	}
+   	cout << '\n';   	
+   	
+   	
 	
 	
-
+        
         
         
         return 0;
