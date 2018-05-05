@@ -99,17 +99,25 @@ void Merge_quick(double A[], double B[], int n)
 
 int main()
 {
-        int n = 1024;
-	double *I;
-	I = gen(n);	
-	double O[n];
-	time_t t_ini, t_fin;
-   	t_ini = clock();
-	Merge_insert(I,O,n);
-	t_fin = clock();
-   	cout <<"wiki: "<< static_cast<double>(t_fin - t_ini)/CLOCKS_PER_SEC<< "s\n";
-   	
-   	
+
+	
+	time_t t_ini, t_fin,t_ini2, t_fin2;
+	fstream arch;
+   	arch.open("vs.txt",fstream::out);
+   	double *I;
+   	for(int n=1; n != 500; n++){	    
+	    I = gen(n);	
+	    double O[n];
+       	t_ini = clock();       	
+	    Merge_insert(I,O,n);	
+	    t_fin = clock();     	
+   	    arch << n<< " " << static_cast<double>(t_fin - t_ini)/CLOCKS_PER_SEC << "s\t";
+   	    t_ini2 = clock();       	
+	    Merge_quick(I,O,n);	
+	    t_fin2 = clock();     	
+	     arch << static_cast<double>(t_fin2 - t_ini2)/CLOCKS_PER_SEC << "s\n";
+   	}   
+   	arch.close();
    	
 
    	cout << '\n';   	
