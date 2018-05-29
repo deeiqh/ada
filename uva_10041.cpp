@@ -4,7 +4,6 @@
 using namespace std;
 
 int nesimo(int B[], int pos, int p, int r);
-//PROFE https://uhunt.onlinejudge.org/id/878871
 int main()
 {
     int cases;
